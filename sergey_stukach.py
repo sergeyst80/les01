@@ -1,12 +1,14 @@
-s = "Не знаю, как там в Лондоне, я не была. Может, там собака — друг человека. А у нас управдом — друг человека!"
-print(f"Шаг 1 - количество символов в строке: {len(s)}")
-print("Шаг 2 - развернутая строка: " + s[::-1])
-print("Шаг 3 - все слова с большой буквы: " + s.title())
-print("Шаг 4 - текст прописными буквами: " + s.upper())
-print(f"Шаг 5 - число вхождений в строку: \"нд\" - {s.count('нд')}, \"ам\" - {s.count('ам')}, \"о\" - {s.count('о')} ")
-print("Шаг 6 - собственные упражнения:")
-print("Шаг 6.1 - текст строчными буквами: " + s.lower())
-print("Шаг 6.2 - строка с первой буквой заглавной: " + s.capitalize())
-print(f"Шаг 6.3 - индекс первого вхождения подстроки \"о\": {s.index('о')}")
-print(f"Шаг 6.4 - является ли строка числом\": {s.isdecimal()}")
-print("Шаг 7 - исходная строка: " + s)
+param = {'weight': 0, 'height': 0}
+
+param['weight'] = int(input("Input your weight (kg): "))
+param['height'] = int(input("Input your height (cm): "))
+bmi = param['weight'] / ((param['height'] / 100) ** 2)
+
+print(f"Your BMI (body mass index): {bmi:.2f} kg/m2")
+
+max_value = 70
+min_value = 10
+before = int(bmi) - min_value
+after = max_value - int(bmi)
+
+print(str(min_value) + '=' * before + '|' + '='*after + str(max_value))
