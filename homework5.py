@@ -2,11 +2,10 @@ import os
 
 cls_str = 'cls' if os.name == 'nt' else 'clear'
 users = {'alex': '111', 'nike': '222', 'mike': '333', 'user': 'user', 'admin': 'admin'}
-current_user = ''
-user_password = ''
 
 
 def authorization(func):
+
     def wrapper(*args, **kwargs):
         check = users.get(input('Enter user name: ').lower())
 
