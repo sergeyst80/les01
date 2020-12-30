@@ -52,4 +52,4 @@ while True:
     else:
         break
 
-    input('Press any key...')
+    input('Press \'Enter\'...')

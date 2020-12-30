@@ -1,20 +1,26 @@
 import os
 
-clear_board = """
- 1 | 2 | 3 
----+---+---
- 4 | 5 | 6 
----+---+---
- 7 | 8 | 9 
-"""
-clr_str = ["clear", "cls"][os.name == "nt"]
+
+def clear_screen():
+    os.system(["clear", "cls"][os.name == "nt"])
+
+
+def draw_board():
+    clear_screen()
+    print("\n {} | {} | {} \n".format(board[0], board[1], board[2])
+          + "---+---+---\n"
+          + " {} | {} | {} \n".format(board[3], board[4], board[5])
+          + "---+---+---\n"
+          + " {} | {} | {} \n".format(board[6], board[7], board[8]))
+
+
 symbols = ["O", "X"]
 current_player = False
 game_repeat = True
 
 while game_repeat:
-    board = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
-    os.system(clr_str)
+    board = [str(i) for i in range(1, 10)]
+    clear_screen()
 
     while True:
         inp = input("Выберите кто начинает игру (\"X\" или \"O\"): ")
@@ -22,36 +28,30 @@ while game_repeat:
             current_player = bool(symbols.index(inp.upper()))
             break
 
-    os.system(clr_str)
-    print(clear_board)
+    draw_board()
 
     for step in range(9):
         print("Ход игрока \"{}\"".format(symbols[current_player]))
 
         while True:
             position = input("Введите номер ячейки: ")
-            if len(position) == 1 and "0" < position <= "9":
-                if type(board[position]) == int:
-                    board[position] = symbols[current_player]
-                    break
+            if position not in symbols and position in board:
+                board[int(position)-1] = symbols[current_player]
+                break
 
-        os.system(clr_str)
-        print("\n {} | {} | {} \n".format(board['1'], board['2'], board['3'])
-              + "---+---+---\n"
-              + " {} | {} | {} \n".format(board['4'], board['5'], board['6'])
-              + "---+---+---\n"
-              + " {} | {} | {} \n".format(board['7'], board['8'], board['9']))
+        draw_board()
 
-        if (board['1'] == board['2'] == board['3']
-                or board['4'] == board['5'] == board['6']
-                or board['7'] == board['8'] == board['9']
-                or board['1'] == board['4'] == board['7']
-                or board['2'] == board['5'] == board['8']
-                or board['3'] == board['6'] == board['9']
-                or board['1'] == board['5'] == board['9']
-                or board['7'] == board['5'] == board['3']):
+        if (board[0] == board[1] == board[2]
+                or board[3] == board[4] == board[5]
+                or board[6] == board[7] == board[8]
+                or board[0] == board[3] == board[6]
+                or board[1] == board[4] == board[7]
+                or board[2] == board[5] == board[8]
+                or board[0] == board[4] == board[8]
+                or board[6] == board[4] == board[2]):
             print("Ура!!! Победил игрок \"{}\"!!!".format(symbols[current_player]))
             break
+
         if step == 8:
             print("Ничья!")
 
