@@ -1,7 +1,11 @@
 import os
 
 cls_str = 'cls' if os.name == 'nt' else 'clear'
-users = {'alex': '111', 'nike': '222', 'mike': '333', 'user': 'user', 'admin': 'admin'}
+users = {'alex': '111',
+         'nike': '222',
+         'mike': '333',
+         'user': 'user',
+         'admin': 'admin'}
 
 
 def authorization(func):
