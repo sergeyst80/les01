@@ -1,11 +1,15 @@
 import os
 
-cls_str = 'cls' if os.name == 'nt' else 'clear'
+clr_str = 'cls' if os.name == 'nt' else 'clear'
 users = {'alex': '111',
          'nike': '222',
          'mike': '333',
          'user': 'user',
          'admin': 'admin'}
+
+
+def clr_scr():
+    os.system(clr_str)
 
 
 def authorization(func):
@@ -16,6 +20,7 @@ def authorization(func):
         if check is None:
             print('User name is unknown! Access denied!')
         elif check == input('Enter password: '):
+            clr_scr()
             func(*args, **kwargs)
         else:
             print('Password is incorrect! Access denied!')
@@ -37,8 +42,12 @@ def func3():
     print('\"Function 3\"')
 
 
+functions = {'1': func1,
+             '2': func2,
+             '3': func3}
+
 while True:
-    os.system(cls_str)
+    clr_scr()
     item = input('Functions menu\n====================\n'
                  + '1\t- Function 1 (authorization)\n'
                  + '2\t- Function 2\n'
@@ -46,13 +55,10 @@ while True:
                  + 'Other\t- Exit\n'
                  + '====================\n'
                  + 'Your choice: ')
+    clr_scr()
 
-    if item == '1':
-        func1()
-    elif item == '2':
-        func2()
-    elif item == '3':
-        func3()
+    if functions.get(item) is not None:
+        functions[item]()
     else:
         break
 
