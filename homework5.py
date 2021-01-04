@@ -21,9 +21,11 @@ def authorization(func):
             print('User name is unknown! Access denied!')
         elif check == input('Enter password: '):
             clr_scr()
-            func(*args, **kwargs)
+            value = func(*args, **kwargs)
         else:
             print('Password is incorrect! Access denied!')
+        
+        return value
 
     return wrapper
 
