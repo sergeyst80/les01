@@ -2,7 +2,8 @@
 from my_module import clr_screen
 import clock_font
 import time
-
+from colorama import init, Fore
+import random
 
 # Generator function
 def animation_generator(val):
@@ -65,7 +66,9 @@ def print_clock(scale, sep):
 
 
 # Start clock
-def start_clock(scale=1, sep=':', speed=1):
+def start_clock(scale=1, sep=':', speed=1, iscolored=False):
+    colors = (Fore.BLUE, Fore.CYAN, Fore.GREEN, Fore.MAGENTA, Fore.RED, Fore.WHITE, Fore.YELLOW)
+    init()
 
     if not 0 < speed <= 20:
         speed = 1 
@@ -74,9 +77,19 @@ def start_clock(scale=1, sep=':', speed=1):
         scale = 1
     
     divider = len(clock_font.print_table[1]) if sep == '.' else 2
+    prev_color = Fore.WHITE
+    new_color = Fore.WHITE
 
     while True:
         
+        if iscolored:
+            
+            while new_color == prev_color:
+                new_color = random.choice(colors)
+        
+            prev_color = new_color
+            print(new_color)
+
         for generator_count in animation_generator(divider):
             clr_screen()
             print_clock(scale, make_separator(sep, generator_count))

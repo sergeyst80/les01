@@ -142,3 +142,5 @@ cython_debug/
 
 # Visual Studio Code files
 .vscode
+
+test.py
